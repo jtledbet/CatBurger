@@ -5,7 +5,7 @@
 body {
   background-image: url("/assets/img/catburger3.png");
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   color: white;
   text-shadow: 2px 2px 2px rgba(168, 7, 7, 0.822);
 }
