@@ -1,19 +1,75 @@
-li {
-  padding: 5px;
-  margin: 5px;
-  background: #faebd7;
+* {
+
+}
+
+body {
+  background-image: url("/assets/img/catburger3.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  color: white;
+  text-shadow: 2px 2px 2px rgba(168, 7, 7, 0.822);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+#header {
+  padding-bottom: 20px;
+}
+
+#undevoured-column {
+
+}
+
+#devoured-column {
+
+}
+
+#add-catburger-card {
+  /* position: fixed; */
+  align-self: bottom;
+  vertical-align: bottom;
+}
+
+.card {
+  padding: 1px;
+  margin: 1px;
+}
+
+.card-header {
+  background: rgb(179, 101, 6) !important;
+  color: white;
+  text-shadow: 2px 2px 2px rgba(168, 7, 7, 0.822);
+  text-align: center;
+  text: bold;
+}
+
+.card-body {
+  background: #552200 !important;
+  color: white;
+  text-align: center;
+}
+
+.card-footer {
+  background: rgb(179, 101, 6) !important;
+  text-align: center;
+}
+
+.button {
+  text-align: center;
+  align-content: center;
 }
 
 .label {
   font-weight: bold;
 }
 
-.create-update-form {
+#form-container {
+  margin-bottom: 5px;
   padding: 5px;
   margin: 5px;
-  background: aqua;
-}
-
-.form-group {
-  margin-bottom: 5px;
+  border: 2px;
+  color: white;
 }
