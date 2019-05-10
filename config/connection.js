@@ -13,6 +13,7 @@ else {
     password: process.env.DB_PASS,
     database: process.env.DB_NAME
 });
+}
 
 // Make connection.
 connection.connect(function(err) {
