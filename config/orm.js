@@ -60,8 +60,6 @@ var orm = {
     queryString += printQuestionMarks(vals.length);
     queryString += ") ";
 
-    console.log(queryString);
-
     connection.query(queryString, vals, function(err, result) {
       if (err) {
         throw err;
@@ -74,16 +72,11 @@ var orm = {
   update: function(table, objColVals, condition, cb) {
     var queryString = "UPDATE " + table;
 
-      console.log(objColVals.devoured);
-      if (objColVals === undefined) objColVals = {devoured: false};
     queryString += " SET ";
-    console.log("orm: ", objColVals);
     queryString += objToSql(objColVals);
-    console.log("orm obj: ", objToSql(objColVals));
     queryString += " WHERE ";
     queryString += condition;
 
-    console.log(queryString);
     connection.query(queryString, function(err, result) {
       if (err) {
         throw err;
