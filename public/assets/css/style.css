@@ -38,6 +38,10 @@ body {
   margin: 1px;
 }
 
+.card:hover {
+  opacity: 50%;
+}
+
 .card-header {
   background: rgb(179, 101, 6) !important;
   color: white;
