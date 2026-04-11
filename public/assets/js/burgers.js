@@ -1,59 +1,52 @@
-// Make sure we wait to attach our handlers until the DOM is fully loaded.
+// Wait for DOM to fully load before attaching handlers
 $(function() {
-  $(".change-devour").on("click", function(event) {
-    var id = $(this).data("id");
-    var newDevour = $(this).data("newdevour");
-    var newDevouredState = {
-      devoured: !newDevour
-    };
 
-    // Send the PUT request.
+  // Toggle devoured / undevoured
+  $(".change-devour").on("click", function() {
+    var id        = $(this).data("id");
+    var newDevour = $(this).data("newdevour");
+
     $.ajax("/api/burgers/" + id, {
       type: "PUT",
-      data: newDevouredState
-    }).then(
-      function() {
-        console.log("changed devour to", newDevour);
-        // Reload the page to get the updated list
-        location.reload();
-      }
-    );
+      data: { devoured: !newDevour }
+    }).then(function() {
+      location.reload();
+    }).fail(function(jqXHR) {
+      alert("Couldn't update burger (status " + jqXHR.status + "). Try again.");
+    });
   });
 
+  // Create a new burger
   $(".create-form").on("submit", function(event) {
-    // Make sure to preventDefault on a submit event.
     event.preventDefault();
 
-    var newBurger = {
-      name: $("#catburga").val().trim(),
-      devoured: 0
-    };
+    var name = $("#catburga").val().trim();
+    if (!name) {
+      alert("Please enter a burger name!");
+      return;
+    }
 
-    // Send the POST request.
     $.ajax("/api/burgers", {
       type: "POST",
-      data: newBurger
-    }).then(
-      function() {
-        console.log("created new burger");
-        // Reload the page to get the updated list
-        location.reload();
-      }
-    );
+      data: { name: name, devoured: 0 }
+    }).then(function() {
+      location.reload();
+    }).fail(function(jqXHR) {
+      alert("Couldn't create burger (status " + jqXHR.status + "). Try again.");
+    });
   });
 
-  $(".delete-burger").on("click", function(event) {
+  // Delete a burger
+  $(".delete-burger").on("click", function() {
     var id = $(this).data("id");
 
-    // Send the DELETE request.
     $.ajax("/api/burgers/" + id, {
       type: "DELETE"
-    }).then(
-      function() {
-        console.log("deleted burger", id);
-        // Reload the page to get the updated list
-        location.reload();
-      }
-    );
+    }).then(function() {
+      location.reload();
+    }).fail(function(jqXHR) {
+      alert("Couldn't delete burger (status " + jqXHR.status + "). Try again.");
+    });
   });
+
 });
