@@ -25,7 +25,8 @@ router.put("/api/burgers/:id", function(req, res) {
   const id = parseInt(req.params.id, 10);
   if (isNaN(id)) return res.status(400).end();
 
-  burger.update({ devoured: req.body.devoured }, id, function(result) {
+  const devoured = req.body.devoured === "true" || req.body.devoured === true ? 1 : 0;
+  burger.update({ devoured }, id, function(result) {
     if (result.affectedRows === 0) {
       return res.status(404).end();
     }
