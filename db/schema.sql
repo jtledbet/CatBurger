@@ -1,4 +1,4 @@
-### Schema
+-- Schema
 
 DROP DATABASE IF EXISTS catburger_db;
 CREATE DATABASE catburger_db;
