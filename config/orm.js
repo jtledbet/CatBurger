@@ -22,7 +22,10 @@ const orm = {
   all: function(table, cb) {
     const sql = "SELECT * FROM ??";
     connection.query(sql, [table], function(err, result) {
-      if (err) throw err;
+      if (err) {
+        console.error("ORM.all error:", err.message);
+        return cb(null, err);
+      }
       cb(result);
     });
   },
@@ -30,7 +33,10 @@ const orm = {
   create: function(table, cols, vals, cb) {
     const sql = `INSERT INTO ?? (${cols.map(() => "??").join(", ")}) VALUES (${placeholders(vals.length)})`;
     connection.query(sql, [table, ...cols, ...vals], function(err, result) {
-      if (err) throw err;
+      if (err) {
+        console.error("ORM.create error:", err.message);
+        return cb(null, err);
+      }
       cb(result);
     });
   },
@@ -41,7 +47,10 @@ const orm = {
     const { setClauses, values } = objToSqlParams(objColVals);
     const sql = `UPDATE ?? SET ${setClauses} WHERE id = ?`;
     connection.query(sql, [table, ...values, idValue], function(err, result) {
-      if (err) throw err;
+      if (err) {
+        console.error("ORM.update error:", err.message);
+        return cb(null, err);
+      }
       cb(result);
     });
   },
@@ -50,7 +59,10 @@ const orm = {
   delete: function(table, idValue, cb) {
     const sql = "DELETE FROM ?? WHERE id = ?";
     connection.query(sql, [table, idValue], function(err, result) {
-      if (err) throw err;
+      if (err) {
+        console.error("ORM.delete error:", err.message);
+        return cb(null, err);
+      }
       cb(result);
     });
   }
